@@ -5,13 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+    <title>Code Quiz</title>
 </head>
 <body>
 
-  <p id= "timer">5:00</p>
+  <!-- Timer -->
+  <div class="header">
+    <div><a href="./highscores.html">High Scores</a></div>
+    <div>Time Remaining: <span id="timer">60</span></div>
+</div>
+<!-- Timer end -->
 
- 
+
+<!-- start button and main page   -->
+<div class="main">
+  <div id="start-page">
+      <h1>Coding Quiz</h1>
+      <p>This quiz tests your basic JavaScript knowledge. Each question has 4 multiple-choice options. Good luck!</p>
+      <button id="start-btn" class="btn" onclick="startGame()">Start</button>
+      </div>
+<!-- start button end  and end page -->
+
+
+
+  <!-- Quiz questions  -->
+  <div class="container">
+    <div id="question-container" class= "hide">
+      <div id= "questions">Questions</div>
+      <div id= "answer-buttons" class="btn-grid">
+        <button class= "btn">Answer 1</button>
+        <button class= "btn">Answer 2</button>
+        <button class= "btn">Answer 3</button>
+        <button class= "btn">Answer 4 </button>
+      </div>
+</div>
+<!-- Quiz questions end  --> 
+
+
+
+<!-- Finished and high score page  --> 
+     <div id="results-page" class="hide">
+      <h2>All done!</h2>
+      <p>Your final score is <span id="final-score"></span>/10</p>
+      <label>Enter your initials: </label>
+      <input type="text" id="initials" size="6">
+      <button id="submit-highscore" class="btn submit-btn" onclick="handleSubmit()">Submit Score</button>
+    </div>
+  </div>
+
+<!-- end of Finished and high score page  --> 
+
 
   <script src="assets/js/script.js"></script> 
 </body>

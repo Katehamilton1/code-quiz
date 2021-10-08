@@ -1,65 +1,85 @@
-// var questions = [
-//    {
-//        prompt: "What does HTML stand for?\n(a) Hypertext Machine Language\n(b) hypertext tools markup links\n(c) hypertext markup lanague\n(d) hight-tech markup language",
-//     answer:"c"
-// }, 
-//     {prompt:"Which of the following characters indicates the closing of a tag? \n(a)< \n(b)> \n(c)/ \n(d)\\",
-//     answer: "c"
-// },
-//     {prompt:"Which of the following attributes is used to add a link to any element? \n(a)ref \n(b)# \n(c)href \n(d)link",
-//     answer: "a"
-//     }
-// ]
 
+const startButton = document.getElementById('start-btn');
+const questionContainerElement= document.getElementById ('question-container');
+const answerButtonsElement = document.getElementById ('answer-buttons');
+const questionElement = document.getElementById ('question');
+const finalScoreEl = document.getElementById('final-score');
+const initialsEl = document.getElementById('initials');
 
-
-var count= 10;
-var timerId;
-var timerEl = document.getElementById("timer");
-
-function startQuiz() {
 timerId = setInterval(timer, 1000);
-timerEl.textContent = count;
-console.log('working') 
+timerEl.textContent = secondsLeft;
+let shuffledQuestions, currentQuestionIndex
+
+
+ 
+startButton.addEventListener('click', startGame);
+// Function to start the Game 
+function startGame (){
+currentQuestionIndex= 0
+
+
+
+ 
+
+ }
+// Function to start the Game 
+
+
+
+
+// Function to make questions appear
+
+function ShowQuestion(question) {
+    questionElement.innerText = question.
+    question.answers.forEach(answers => {
+        const button= document.createElement('button')
+        button.innertext = answer.text
+        button.classList.add('btn')
+        if (answer.correct) {
+            button.dataset.correct= answers.correct
+        }
+        button.addEventListener ('click', selectAnswer);
+        answerButtonElement.appendChild(button)
+    })
 }
-function getQuestion() {
-    
+
+
+// Function to make questions appear
+timerId = setInterval(timer, 1000);
+timerEl.textContent = secondsLeft;
+
+secondsLeft--;
+timerEl.textContent= secondsLeft;
+if (secondsLeft <= 0) {
+    quizEnd()
 }
-function questionChecker() {
-    
+// timer
+
+
+// to end the game 
+function endGame () {
+    timerEl.textContent = 0;
+
+
+// log currentScore
+    finalScore = currentScore;
+    finalScoreEl.textContent = finalScore;
 }
-function timer() {
-    count--;
-    timerEl.textContent= count;
-    if (count <= 0) {
-        quizEnd()
+
+
+// to end the game 
+
+
+// Game questions 
+
+ const questions = [
+    {
+      question: 'Commonly used data types DO NOT include?',
+      answers:[ 
+         { text: 'strings', correct: false},
+         { text: 'booleans', correct: false },
+         { text:'alerts', correct: true },
+         { text:'numbers', correct: false}
+          ]
     }
-
-}
-function saveHighScore() {
-    
-}
-
-function quizEnd() {
-    clearInterval(timerId);
-}
-
-startQuiz();
-
-
-
-
-
-
-
-// for(var i=0; i< questions.length; i++) {
-//     var response = window.prompt(questions[i].prompt);
-//     if (response === questions[i].answer){
-//         score++;
-//         alert("correct!");
-//     } else {
-//         alert("wrong answer!");
-//     }
-// }
-
-// alert("You got" + score + "/" + questions.length)
+ ]
