@@ -1,90 +1,98 @@
+var allQuestions = [
+  {
+    question: "Commonly used data types DO NOT include:",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    answer: "alerts",
+  },
+  {
+    question:
+      "The condition in an if / else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: "parentheses",
+  },
+  {
+    question: "Arrays in Javascript can be used to store",
+    choices: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "all of the above",
+    ],
+    answer: "all of the above",
+  },
+];
 
-const startButton = document.getElementById('start-btn');
-const questions = document.getElementById('questions');
-const questionContainerElement= document.getElementById ('question-container');
-const questionElement = document.getElementById ('questions');
-const finalScoreEl = document.getElementById('final-score');
-const initialsEl = document.getElementById('initials');
-let currentQuestionIndex= 0;
-var score= 0;
+const startButton = document.getElementById("start-btn");
+const questions = document.getElementById("questions");
+const questionContainer = document.getElementById("question-container");
+const questionElement = document.getElementById("questions");
+const finalScoreEl = document.getElementById("final-score");
+const initialsEl = document.getElementById("initials");
+const resultsEl = document.getElementById("results-page");
+const startPage = document.getElementById("start-page");
+const choicesEl = document.getElementById("btnQ");
+let btn1 = document.getElementById("btn-1");
+let btn2 = document.getElementById("btn-2");
+let btn3 = document.getElementById("btn-3");
+let btn4 = document.getElementById("btn-4");
+console.log(btn1);
+console.log(btn2);
+console.log(btn3);
+console.log(btn4);
+btn1.addEventListener("click", checkCorrect);
+btn2.addEventListener("click", checkCorrect);
+btn3.addEventListener("click", checkCorrect);
+btn4.addEventListener("click", checkCorrect);
 
- 
+let currentQuestionIndex = 0;
+var score = 0;
 
-startButton.addEventListener('click', startGame);
+resultsEl.style.display = "none";
+questions.style.display = "none";
+questionContainer.style.display = "none";
+startButton.addEventListener("click", startGame);
 
+// Function to start the Game
+function startGame() {
+  startPage.style.display = "none";
+  questions.style.display = "block";
+  questionContainer.style.display = "block";
+  currentQuestionIndex = 0;
+  askQuestion();
 
-// Function to start the Game 
-function startGame () {
-currentQuestionIndex= 0;
-// askQuestion();
-
-// timer
-var seconds = document.getElementById("countdown").textContent;
-var countdown = setInterval(function() {
+  // timer
+  var seconds = document.getElementById("countdown").textContent;
+  var countdown = setInterval(function () {
     seconds--;
     document.getElementById("countdown").textContent = seconds;
     if (seconds <= 0) clearInterval(countdown);
-}, 1000);
-// timer
- }
-
-
-
-
-
-
-//end of  Function to start the Game 
-
-
+  }, 1000);
+}
+// Function to start the Game
 
 // Function to make questions appear
 
-// function askQuestion() {
-//     var askQuestions = allQuestions[currentQuestionIndex].question;
-//     document.getElementById('questions').innerHTML = askQuestions;
+function askQuestion() {
+  var currentQuestion = questions[currentQuestionIndex];
 
-// }
-
-for(var i=0; i < allQuestions.length; i++) {
-    var response= window.prompt(allQuestions[i].prompt);
-    if (response == questions[i].answer) {
-        score++;
-        alert('correct!');
-    } else {
-        alert('wrong!');
-    }
- }  
- alert ('you got' + score + "/" + questions.length)
-
-
-
-
-
-
-
-
-
-// to end the game 
-function endGame () {
+  var askQuestions = allQuestions[currentQuestionIndex].question;
+  document.getElementById("questions").innerHTML = askQuestions;
 }
 
-// log currentScore
-
+function checkCorrect() {
+  var curQ = allQuestions[currentQuestionIndex];
+  var curCorrect = curQ.answer;
+  var userAnswer = curQ.choices[this.dataset.number - 1];
+  console.log(userAnswer);
+}
 
 // to end the game
+function endGame() {
+  clearInterval(timer);
+  resultsEl.style.display = "block";
+  questions.style.display = "none";
+  questionContainer.style.display = "none";
+  startPage.style.display = "none";
+}
 
-
-// game questions
-
-var allQuestions = [
-    {
-      prompt: "What color is a banana?\n(a) Red/Green\n(b) purple\n(c) yellow ",
-      answer: "c"
-    
-    },
-    {
-        prompt: "What color is a banana?\n(a) Red/Green\n(b) purple\n(c) yellow ",
-        answer: "c"
-      
-      }
-];
+// to end the game
