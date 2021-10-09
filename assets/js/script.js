@@ -84,7 +84,28 @@ function checkCorrect() {
   var curCorrect = curQ.answer;
   var userAnswer = curQ.choices[this.dataset.number - 1];
   console.log(userAnswer);
+  if (userAnswer == curCorrect) {
+      console.log('correct answer');
+      correctAnswer()
+  } else {
+    console.log('wrong answer');
+    wrongAnwer()
+  }
 }
+function correctAnswer () {
+    score += 5;
+    console.log('updated score',score)
+}
+
+function wrongAnwer() {
+    score -= 5;
+    if (score <= 0) {
+        console.log ('Game OVer')
+    }
+    console.log('updated score',score)
+} 
+
+
 
 // to end the game
 function endGame() {
