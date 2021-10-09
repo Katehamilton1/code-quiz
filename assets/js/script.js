@@ -31,6 +31,7 @@ const initialsEl = document.getElementById("initials");
 const resultsEl = document.getElementById("results-page");
 const startPage = document.getElementById("start-page");
 const choicesEl = document.getElementById("btnQ");
+var seconds = document.getElementById("countdown").textContent;
 let btn1 = document.getElementById("btn-1");
 let btn2 = document.getElementById("btn-2");
 let btn3 = document.getElementById("btn-3");
@@ -44,8 +45,8 @@ btn2.addEventListener("click", checkCorrect);
 btn3.addEventListener("click", checkCorrect);
 btn4.addEventListener("click", checkCorrect);
 
+
 let currentQuestionIndex = 0;
-var score = 0;
 
 resultsEl.style.display = "none";
 questions.style.display = "none";
@@ -58,10 +59,9 @@ function startGame() {
   questions.style.display = "block";
   questionContainer.style.display = "block";
   currentQuestionIndex = 0;
-  askQuestion();
+  renderQuestion ();
 
   // timer
-  var seconds = document.getElementById("countdown").textContent;
   var countdown = setInterval(function () {
     seconds--;
     document.getElementById("countdown").textContent = seconds;
@@ -72,11 +72,15 @@ function startGame() {
 
 // Function to make questions appear
 
-function askQuestion() {
-  var currentQuestion = questions[currentQuestionIndex];
 
-  var askQuestions = allQuestions[currentQuestionIndex].question;
-  document.getElementById("questions").innerHTML = askQuestions;
+function renderQuestion (){
+    var curQ = allQuestions[currentQuestionIndex];
+    document.getElementById("questions").innerHTML = curQ.question;
+
+    btn1.textContent= curQ.choices[0];
+    btn2.textContent= curQ.choices[1];
+    btn3.textContent= curQ.choices[2];
+    btn4.textContent= curQ.choices[3];
 }
 
 function checkCorrect() {
@@ -91,29 +95,39 @@ function checkCorrect() {
     console.log('wrong answer');
     wrongAnwer()
   }
+// if there are questions left, go to the next question. 
+  if (currentQuestionIndex < allQuestions.length-1) {
+    currentQuestionIndex++;
+      console.log('out of bounds')
+  }
+  else {
+      console.log('endgame')
+      console.log ('go to results page')
+      renderScore()
+  }
+  renderQuestion ();
 }
 function correctAnswer () {
-    score += 5;
-    console.log('updated score',score)
+    seconds += 5;
+    console.log('updated score',seconds)
 }
 
 function wrongAnwer() {
-    score -= 5;
-    if (score <= 0) {
+    seconds -= 5;
+    if (seconds <= 0) {
         console.log ('Game OVer')
     }
-    console.log('updated score',score)
+    console.log('updated score',seconds)
 } 
 
-
-
-// to end the game
-function endGame() {
-  clearInterval(timer);
-  resultsEl.style.display = "block";
-  questions.style.display = "none";
-  questionContainer.style.display = "none";
-  startPage.style.display = "none";
+function renderScore(){
+    console.log(countdown);
+    clearInterval(countdown);
+    resultsEl.style.display = "block";
+    questions.style.display = "none";
+    questionContainer.style.display = "none";
+    startPage.style.display = "none";
 }
 
-// to end the game
+
+
