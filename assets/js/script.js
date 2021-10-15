@@ -23,6 +23,7 @@ var allQuestions = [
 ];
 
 const startButton = document.getElementById("start-btn");
+const submit = document.getElementById("submit-highscore");
 const questions = document.getElementById("questions");
 const questionContainer = document.getElementById("question-container");
 const questionElement = document.getElementById("questions");
@@ -32,6 +33,7 @@ const resultsEl = document.getElementById("results-page");
 const startPage = document.getElementById("start-page");
 const choicesEl = document.getElementById("btnQ");
 var seconds = document.getElementById("countdown").textContent;
+var scoresList = document.getElementById("scoresList");
 let btn1 = document.getElementById("btn-1");
 let btn2 = document.getElementById("btn-2");
 let btn3 = document.getElementById("btn-3");
@@ -121,13 +123,33 @@ function wrongAnwer() {
 } 
 
 function renderScore(){
+  
     console.log(countdown);
     clearInterval(countdown);
     resultsEl.style.display = "block";
     questions.style.display = "none";
     questionContainer.style.display = "none";
     startPage.style.display = "none";
+
 }
+// function ChangePage () {
+//   window.location = '/Users/katehamilton/Desktop/Projects/week-5/code-quiz/highscores.html'
+// }
+
+
+function finalScores(){
+// ChangePage ()
+var userName= initialsEl.value
+var finalScore ={ 
+  initials: userName, 
+  highscore: countdown
+}
+;
+window.localStorage.setItem("highScores", JSON.stringify(finalScore));
+}
+
+submit.onclick = finalScores;
+
 
 
 
