@@ -22,6 +22,7 @@ var allQuestions = [
   },
 ];
 
+var countdown;
 const startButton = document.getElementById("start-btn");
 let submit = document.getElementById("submit-highscore");
 const questions = document.getElementById("questions");
@@ -55,7 +56,6 @@ let currentQuestionIndex = 0;
 resultsEl.style.display = "none";
 questions.style.display = "none";
 questionContainer.style.display = "none";
-startButton.addEventListener("click", startGame);
 
 // Function to start the Game
 function startGame() {
@@ -66,10 +66,11 @@ function startGame() {
   renderQuestion ();
 
   // timer
-  var countdown = setInterval(function () {
+ setInterval(function () {
     seconds--;
-    document.getElementById("countdown").textContent = seconds;
     if (seconds <= 0) clearInterval(countdown);
+     if (seconds <= 0) renderScore();
+    document.getElementById("countdown").textContent = seconds;
   }, 1000);
 }
 
@@ -102,8 +103,6 @@ function checkCorrect() {
       console.log('out of bounds')
   }
   else {
-      console.log('endgame')
-      console.log ('go to results page')
       renderScore()
   }
   renderQuestion ();
@@ -116,9 +115,8 @@ function correctAnswer () {
 function wrongAnwer() {
     seconds -= 5;
     if (seconds <= 0) {
-        console.log ('Game OVer')
+      renderScore()
     }
-    console.log('updated score',seconds)
 } 
 
 function renderScore(){
