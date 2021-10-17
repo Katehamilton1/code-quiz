@@ -134,15 +134,20 @@ function renderScore(){
 
 
 function finalScores(){
-// ChangePage ()
 var userName= initialsEl.value
 var finalScore ={ 
   initials: userName, 
-  score: countdown
+  score: seconds
+}
+var scores = JSON.parse(window.localStorage.getItem('scores')) || [];
+     
+scores.push(finalScore)
+
+window.localStorage.setItem('scores', JSON.stringify(scores));
+
 }
 
-window.localStorage.setItem("score", JSON.stringify(finalScore));
-}
+
 
 submit.onclick = finalScores;
 
