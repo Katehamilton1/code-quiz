@@ -20,21 +20,51 @@ var allQuestions = [
     ],
     answer: "all of the above",
   },
+  {
+    question: "The condition in an if/else statement is enclosed within ______.",
+    choices: [
+      "quotes", 
+      "curly brackets",
+       "parentheses",
+        "square brackets",
+    ],
+    answer: "parentheses",
+  },
+  {
+    question: "What is a DOM in JavaScript?",
+    choices: [
+      "Data of Mine", 
+      "Document of Master",
+       "Data Object Modal", 
+       "Document Object Model",
+    ],
+    answer: "Document Object Model",
+  },
+  {
+    question: "Is JS case-sensitive?",
+    choices: [
+      "Yes",
+       "No",
+      "I have no clue",
+       "sometimes.",
+    ],
+    answer: "Yes",
+  }
 ];
 
 var countdown;
-const startButton = document.getElementById("start-btn");
+let startButton = document.getElementById("start-btn");
 let submit = document.getElementById("submit-highscore");
-const questions = document.getElementById("questions");
-const questionContainer = document.getElementById("question-container");
-const questionElement = document.getElementById("questions");
+let questions = document.getElementById("questions");
+let questionContainer = document.getElementById("question-container");
+let questionElement = document.getElementById("questions");
 let finalScoreEl = document.getElementById("final-score");
 const initialsEl = document.getElementById("initials");
 const resultsEl = document.getElementById("results-page");
 const startPage = document.getElementById("start-page");
 const choicesEl = document.getElementById("btnQ");
-var seconds = document.getElementById("countdown").textContent;
-var scoresList = document.getElementById("scoresList");
+let seconds = document.getElementById("countdown").textContent;
+let scoresList = document.getElementById("scoresList");
 let btn1 = document.getElementById("btn-1");
 let btn2 = document.getElementById("btn-2");
 let btn3 = document.getElementById("btn-3");
@@ -52,7 +82,6 @@ submit.addEventListener("click", function () {
 });
 
 let currentQuestionIndex = 0;
-
 resultsEl.style.display = "none";
 questions.style.display = "none";
 questionContainer.style.display = "none";
@@ -64,17 +93,14 @@ function startGame() {
   questionContainer.style.display = "block";
   currentQuestionIndex = 0;
   renderQuestion ();
-
   // timer
- setInterval(function () {
+  countdown = setInterval(function () {
     seconds--;
     if (seconds <= 0) clearInterval(countdown);
      if (seconds <= 0) renderScore();
     document.getElementById("countdown").textContent = seconds;
   }, 1000);
 }
-
-
 function renderQuestion (){
     var curQ = allQuestions[currentQuestionIndex];
     document.getElementById("questions").innerHTML = curQ.question;
@@ -111,16 +137,13 @@ function correctAnswer () {
     seconds += 5;
     console.log('updated score',seconds)
 }
-
 function wrongAnwer() {
     seconds -= 5;
     if (seconds <= 0) {
       renderScore()
     }
 } 
-
 function renderScore(){
-  
     clearInterval(countdown);
     resultsEl.style.display = "block";
     questions.style.display = "none";
@@ -128,9 +151,6 @@ function renderScore(){
     startPage.style.display = "none";
     finalScoreEl.textContent = seconds;
 }
-
-
-
 function finalScores(){
 var userName= initialsEl.value
 var finalScore ={ 
@@ -144,9 +164,6 @@ scores.push(finalScore)
 window.localStorage.setItem('scores', JSON.stringify(scores));
 
 }
-
-
-
 submit.onclick = finalScores;
 
 
