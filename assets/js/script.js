@@ -23,11 +23,11 @@ var allQuestions = [
 ];
 
 const startButton = document.getElementById("start-btn");
-const submit = document.getElementById("submit-highscore");
+let submit = document.getElementById("submit-highscore");
 const questions = document.getElementById("questions");
 const questionContainer = document.getElementById("question-container");
 const questionElement = document.getElementById("questions");
-const finalScoreEl = document.getElementById("final-score");
+let finalScoreEl = document.getElementById("final-score");
 const initialsEl = document.getElementById("initials");
 const resultsEl = document.getElementById("results-page");
 const startPage = document.getElementById("start-page");
@@ -46,7 +46,9 @@ btn1.addEventListener("click", checkCorrect);
 btn2.addEventListener("click", checkCorrect);
 btn3.addEventListener("click", checkCorrect);
 btn4.addEventListener("click", checkCorrect);
-
+submit.addEventListener("click", function () {
+  window.location.replace("highscores.html");
+});
 
 let currentQuestionIndex = 0;
 
@@ -70,9 +72,6 @@ function startGame() {
     if (seconds <= 0) clearInterval(countdown);
   }, 1000);
 }
-// Function to start the Game
-
-// Function to make questions appear
 
 
 function renderQuestion (){
@@ -124,17 +123,14 @@ function wrongAnwer() {
 
 function renderScore(){
   
-    console.log(countdown);
     clearInterval(countdown);
     resultsEl.style.display = "block";
     questions.style.display = "none";
     questionContainer.style.display = "none";
     startPage.style.display = "none";
-
+    finalScoreEl.textContent = seconds;
 }
-// function ChangePage () {
-//   window.location = '/Users/katehamilton/Desktop/Projects/week-5/code-quiz/highscores.html'
-// }
+
 
 
 function finalScores(){
@@ -142,14 +138,12 @@ function finalScores(){
 var userName= initialsEl.value
 var finalScore ={ 
   initials: userName, 
-  highscore: countdown
+  score: countdown
 }
-;
-window.localStorage.setItem("highScores", JSON.stringify(finalScore));
+
+window.localStorage.setItem("score", JSON.stringify(finalScore));
 }
 
 submit.onclick = finalScores;
-
-
 
 
